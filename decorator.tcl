@@ -38,11 +38,9 @@ proc @ { args } {
         set body [list]
 
         # call the decorator with the original method
-        lappend body "$decorator_func $decorated_method"
-        lappend body {{*}$args}
+        lappend body "$decorator_func $decorated_method " {{*}$args} "\n"
         # define the wrapper
-        proc $wrapper_method_name { args } [join $body " "]
-        # puts "proc $wrapper_method_name { args } [join $body " "]"
+        proc $wrapper_method_name { args } [join $body ""]
 
         # retain the last wrapped method as the decorated method
         set decorated_method $wrapper_method_name
